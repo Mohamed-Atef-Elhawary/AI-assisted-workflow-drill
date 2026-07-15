@@ -1,11 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [SettingsFormComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('AI-assisted-workflow-drill');
-}
+export class App {}

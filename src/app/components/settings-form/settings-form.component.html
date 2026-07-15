@@ -1,0 +1,99 @@
+<div class="mx-auto flex w-full max-w-2xl flex-col gap-6 p-6">
+  <div class="flex flex-col gap-1">
+    <h1 class="text-2xl font-semibold text-gray-900">User Settings</h1>
+    <p class="text-sm text-gray-600">Update your profile details and notification preferences.</p>
+  </div>
+
+  <mat-card class="!rounded-xl !shadow-md">
+    <mat-card-header class="!px-6 !pt-6">
+      <mat-card-title class="!text-lg !font-semibold">Account</mat-card-title>
+      <mat-card-subtitle class="!text-sm">Manage your personal information</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="!px-6 !pb-2">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSave()"
+        class="flex flex-col gap-4"
+        novalidate
+      >
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Display Name</mat-label>
+          <input matInput formControlName="displayName" autocomplete="name" />
+          @if (displayNameError(); as error) {
+            <mat-error>{{ error }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" autocomplete="email" />
+          @if (emailError(); as error) {
+            <mat-error>{{ error }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>New Password (optional)</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            autocomplete="new-password"
+          />
+          @if (passwordError(); as error) {
+            <mat-error>{{ error }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="mt-2 flex flex-col gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
+          <h2 class="text-base font-medium text-gray-900">Notifications</h2>
+
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-gray-900">Email notifications</span>
+              <span class="text-xs text-gray-600">Receive updates in your inbox</span>
+            </div>
+            <mat-slide-toggle formControlName="emailNotifications" color="primary" />
+          </div>
+
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-gray-900">Push notifications</span>
+              <span class="text-xs text-gray-600">Get alerts on your devices</span>
+            </div>
+            <mat-slide-toggle formControlName="pushNotifications" color="primary" />
+          </div>
+
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-gray-900">Marketing emails</span>
+              <span class="text-xs text-gray-600">Product news and promotional offers</span>
+            </div>
+            <mat-slide-toggle formControlName="marketingEmails" color="primary" />
+          </div>
+        </div>
+
+        <div class="mt-2 flex flex-wrap justify-end gap-3">
+          <button
+            mat-stroked-button
+            type="button"
+            class="!min-w-24"
+            (click)="onReset()"
+          >
+            Reset
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            class="!min-w-24"
+            [disabled]="saveDisabled"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
