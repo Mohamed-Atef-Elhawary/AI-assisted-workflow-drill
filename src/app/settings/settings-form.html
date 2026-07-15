@@ -1,0 +1,90 @@
+<div class="settings-page">
+  <header class="settings-header">
+    <h1>Settings</h1>
+    <p>Manage your account preferences and notification settings.</p>
+  </header>
+
+  @if (saveMessage(); as message) {
+    <div class="save-banner" role="status">{{ message }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="settings-form" novalidate>
+    <section class="settings-section">
+      <h2>Profile</h2>
+
+      <div class="field">
+        <label for="displayName">Display name</label>
+        <input
+          id="displayName"
+          type="text"
+          formControlName="displayName"
+          placeholder="Jane Doe"
+          [class.invalid]="isInvalid('displayName')"
+        />
+        @if (isInvalid('displayName')) {
+          <span class="error">Display name must be at least 2 characters.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="jane@example.com"
+          [class.invalid]="isInvalid('email')"
+        />
+        @if (isInvalid('email')) {
+          <span class="error">Enter a valid email address.</span>
+        }
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Preferences</h2>
+
+      <div class="field">
+        <label for="language">Language</label>
+        <select id="language" formControlName="language">
+          @for (lang of languages; track lang.value) {
+            <option [value]="lang.value">{{ lang.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="theme">Theme</label>
+        <select id="theme" formControlName="theme">
+          @for (theme of themes; track theme.value) {
+            <option [value]="theme.value">{{ theme.label }}</option>
+          }
+        </select>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Notifications</h2>
+
+      <label class="checkbox-field">
+        <input type="checkbox" formControlName="emailNotifications" />
+        <span>Email notifications</span>
+      </label>
+
+      <label class="checkbox-field">
+        <input type="checkbox" formControlName="pushNotifications" />
+        <span>Push notifications</span>
+      </label>
+
+      <label class="checkbox-field">
+        <input type="checkbox" formControlName="marketingEmails" />
+        <span>Marketing emails</span>
+      </label>
+    </section>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="reset()">Reset</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save changes</button>
+    </div>
+  </form>
+</div>
