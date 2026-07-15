@@ -1,0 +1,24 @@
+# Project Rules & Guidelines
+
+## Project Tech Stack
+* **Framework:** Angular (v20+)
+* **Language:** TypeScript & JavaScript
+* **Styling:** Tailwind CSS & Angular Material (Avoid Bootstrap)
+
+---
+
+## Strict Development Rules
+
+### 1. Avoid Deprecated Animations (Framework Deprecation Rule)
+* **Rule:** Never use legacy or deprecated animation packages. Specifically, **do not** utilize `provideAnimationsAsync()` in Angular v20.2+. 
+* **Action:** Always use modern, up-to-date standalone animation providers to keep the codebase clean and avoid future technical debt.
+
+### 2. Pragmatic Architecture (Anti-Over-Engineering Rule)
+* **Rule:** Maintain a clean balance between structured architecture and simplicity. 
+* **Action:** Do not create excessive abstract interfaces or over-engineer simple features. Keep component logic and styles cohesive (rely on Tailwind CSS and Angular Material cleanly) without scattering closely related code across poorly-mapped files, which increases review cognitive load.
+
+### 3. Robust Input Validation (Edge Cases Rule)
+* **Rule:** Never rely solely on weak, default framework validators for critical fields.
+* **Action:** 
+  * Implement strict email validation using precise, secure regular expressions (avoid permissive email matching).
+  * Write custom validators to handle edge cases, such as preventing form submission when inputs contain only whitespace.
